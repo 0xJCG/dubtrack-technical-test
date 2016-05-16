@@ -3,45 +3,56 @@ from flask import render_template
 from flask import request
 
 import requests
+import json
 
 app = Flask('technical-test')
 
 
-def get_channels():
+def get_rooms():
     url = 'https://api.dubtrack.fm/room'
     response = requests.get(url)
     if response.status_code == requests.codes.ok:
-        return True
+        return json.loads(response.text)
     return False
 
 
-def get_channel_info(channel):
-    url = 'https://api.dubtrack.fm/room' + channel
+def get_room_info(room):
+    url = 'https://api.dubtrack.fm/room/' + room
     response = requests.get(url)
     if response.status_code == requests.codes.ok:
-        return True
+        return json.loads(response.text)
     return False
 
 
-@app.route('/', method='POST')
+def get_room_history_playlist(room):
+    url = 'https://api.dubtrack.fm/room/' + room + '/playlist/history'
+    response = requests.get(url)
+    if response.status_code == requests.codes.ok:
+        return json.loads(response.text)
+    return False
+
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        channel = get_channel_info(request.form['channel'])
-        if channel:
-            return render_template('search.html', channel=channel)
+        room = get_room_info(request.form['room'])
+        if room:
+            return render_template('search.html', room=room)
         else:
             return render_template('error.html')
-    channels = get_channels()
-    return render_template('index.html', channels=channels)
+    rooms = get_rooms()
+    return render_template('index.html', rooms=rooms)
 
 
-@app.route('/<int:channel_id>')
-def show_channel_info(channel_id):
-    ch = get_channel_info(channel_id)
-    if ch:
-        return render_template('channel.html')
+@app.route('/playlist/<room_url>')
+def show_room_info(room_url):
+    room = get_room_info(room_url)
+    if room:
+        playlist = get_room_history_playlist(room['data']['_id'])
+        return render_template('room.html', playlist=playlist)
     return render_template('error.html')
 
 
 if __name__ == '__main__':
+    app.debug = True
     app.run()
