@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Technical test - Channel information</title>
+    <title>Technical test - Channel playlist history</title>
 </head>
 <body>
     <h1>Technical test</h1>
-    <ul id="channel">
-        <li>Channel name: {{ channel.name }}.</li>
-        <li>Actual song played:
+    <ul id="channel_playlist">
+        <li>Playlist history:
             <ul>
-                <li>Name: {{ channel.currentSong.name }}.</li>
-                <li>User who uploaded it: {{ channel.currentSong.user }}.</li>
-                <li>Votes: {{ channel.currentSong.voteUp }} up / {{ channel.currentSong.voteUp }} down.</li>
+            {% for s in playlist.data %}
+                <li>Name: {{ s._song.name }}.</li>
+                <li>User who uploaded it: {{ s._user.username }}.</li>
+                <li>Votes: {{ s.updubs }} up / {{ s.downdubs }} down.</li>
+            {% endfor %}
             </ul>
         </li>
         <li>People connected:
