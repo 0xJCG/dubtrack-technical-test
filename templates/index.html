@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Technical test</title>
 </head>
 <body>
-
+    <h1>Technical test</h1>
+    <ul id="list">
+    {% for c in channels %}
+        <li><a href="/{{ c.roomUrl }}">{{ c.name }}</a></li>
+    {% endfor %}
+    </ul>
 </body>
 </html>

@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Technical test - Channel information</title>
 </head>
 <body>
-
+    <h1>Technical test</h1>
+    <ul id="channel">
+        <li>Channel name: {{ channel.name }}.</li>
+        <li>Actual song played:
+            <ul>
+                <li>Name: {{ channel.currentSong.name }}.</li>
+                <li>User who uploaded it: {{ channel.currentSong.user }}.</li>
+                <li>Votes: {{ channel.currentSong.voteUp }} up / {{ channel.currentSong.voteUp }} down.</li>
+            </ul>
+        </li>
+        <li>People connected:
+            <ul>
+            {% for u in channels.currentSong.users %}
+                <li>{{ u.name }}</li>
+            {% endfor %}
+            </ul>
+        </li>
+    </ul>
 </body>
 </html>
