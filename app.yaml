@@ -10,4 +10,4 @@ libraries:
 
 handlers:
 - url: .*
-  script: main.app
+  script: app.app
