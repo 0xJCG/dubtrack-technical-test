@@ -1,9 +1,9 @@
+import json
+import requests
+
 from flask import Flask
 from flask import render_template
 from flask import request
-
-import requests
-import json
 
 app = Flask('technical-test')
 
@@ -13,7 +13,7 @@ def get_rooms():
     response = requests.get(url)
     if response.status_code == requests.codes.ok:
         return json.loads(response.text)
-    return False
+    return None
 
 
 def get_room_info(room):
@@ -21,7 +21,7 @@ def get_room_info(room):
     response = requests.get(url)
     if response.status_code == requests.codes.ok:
         return json.loads(response.text)
-    return False
+    return None
 
 
 def get_room_history_playlist(room):
@@ -29,14 +29,14 @@ def get_room_history_playlist(room):
     response = requests.get(url)
     if response.status_code == requests.codes.ok:
         return json.loads(response.text)
-    return False
+    return None
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         room = get_room_info(request.form['room'])
-        if room:
+        if room is not None:
             return render_template('search.html', room=room)
         else:
             return render_template('error.html')
@@ -47,7 +47,7 @@ def index():
 @app.route('/playlist/<room_url>')
 def show_room_info(room_url):
     room = get_room_info(room_url)
-    if room:
+    if room is not None:
         playlist = get_room_history_playlist(room['data']['_id'])
         return render_template('room.html', playlist=playlist)
     return render_template('error.html')

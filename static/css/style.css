@@ -1,0 +1,64 @@
+body {
+    background: url("../images/background.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: white;
+    text-align: center;
+}
+
+header {
+    background: rgba(26, 26, 26, 0.8) none repeat scroll 0 0;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+header h1 {
+    float: left;
+    margin-left: 20px;
+}
+
+header form {
+    float: right;
+    margin-top: 25px;
+    margin-right: 20px;
+}
+
+a {
+    color: white;
+}
+
+article {
+    margin-top: 100px;
+}
+
+ul {
+    padding: 0; /* remove default padding and all margins! */
+    margin: 20px;
+    list-style-type: none; /* remove the • */
+    vertical-align: middle;
+}
+
+ul li {
+    border-radius: 25px;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(26, 26, 26, 0.8);
+    float: left;
+    margin: 0 0 20px 20px;
+}
+
+.clear {
+    clear: both;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}

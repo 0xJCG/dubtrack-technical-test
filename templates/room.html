@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Technical test - Room playlist history</title>
+    <meta charset="UTF-8" />
+    <title>Dubtrack technical test - Room playlist history</title>
+    <link rel="stylesheet" href="../static/css/style.css" media="all" />
 </head>
 <body>
-    <h1>Technical test</h1>
-    <ul id="playlist">
-        <li>Playlist history:
-            <ul>
-            {% for s in playlist.data %}
-                <li>Name: {{ s._song.name }}.</li>
-                <li>User who uploaded it: {{ s._user.username }}.</li>
-                <li>Votes: {{ s.updubs }} up / {{ s.downdubs }} down.</li>
-            {% endfor %}
-            </ul>
-        </li>
-    </ul>
+    <header>
+        <h1><a href="/">Dubtrack technical test</a></h1>
+    </header>
+    <article>
+        <h3>Playlist history</h3>
+        {% for s in playlist.data %}
+        <ul>
+            <li>
+                <p>{{ s._song.name }}</p>
+                <p>by {{ s._user.username }}</p>
+                <p><span class="green">{{ s.updubs }}</span> / <span class="red">{{ s.downdubs }}</span></p>
+            </li>
+        </ul>
+        {% endfor %}
+        <div class="clear"></div>
+    </article>
 </body>
 </html>

@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Technical test</title>
+    <meta charset="UTF-8" />
+    <title>Dubtrack technical test</title>
+    <link rel="stylesheet" href="../static/css/style.css" media="all" />
 </head>
 <body>
-    <h1>Technical test</h1>
-    <form method="post" action="">
-        <input type="text" name="room" />
-        <input type="submit" name="submit" />
-    </form>
-    <ul id="list">
-    {% for r in rooms.data %}
-        <li><a href="/playlist/{{ r.roomUrl }}">{{ r.name }}</a></li>
-    {% endfor %}
-    </ul>
+    <header>
+        <h1><a href="/">Dubtrack technical test</a></h1>
+        <form method="post" action="">
+            <input type="text" name="room" placeholder="Search for a room" />
+            <input type="submit" name="submit" value="Search!" />
+        </form>
+    </header>
+    <article>
+        <h3>Rooms online right now</h3>
+        <ul id="list">
+        {% for r in rooms.data %}
+            <li><a href="/playlist/{{ r.roomUrl }}">{{ r.name }}</a></li>
+        {% endfor %}
+        </ul>
+        <div class="clear"></div>
+    </article>
 </body>
 </html>
